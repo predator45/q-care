@@ -1,0 +1,122 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_bottom_nav"
+    android:gravity="center">
+
+    <!-- HOME -->
+    <LinearLayout
+        android:id="@+id/navHome"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_nav_selector"
+        android:paddingHorizontal="12dp"
+        android:layout_marginHorizontal="6dp">
+
+        <ImageView
+            android:id="@+id/iconHome"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_home"
+            app:tint="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/textHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:textSize="11sp"
+            android:textColor="#B6B6B6"/>
+    </LinearLayout>
+
+    <!-- KUNJUNGAN -->
+    <LinearLayout
+        android:id="@+id/navKunjungan"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_nav_selector"
+        android:paddingHorizontal="12dp"
+        android:layout_marginHorizontal="6dp">
+
+        <ImageView
+            android:id="@+id/iconKunjungan"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_calendar"
+            app:tint="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/textKunjungan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kunjungan"
+            android:textSize="11sp"
+            android:textColor="#B6B6B6"/>
+    </LinearLayout>
+
+    <!-- RIWAYAT -->
+    <LinearLayout
+        android:id="@+id/navRiwayat"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_nav_selector"
+        android:paddingHorizontal="12dp"
+        android:layout_marginHorizontal="6dp">
+
+        <ImageView
+            android:id="@+id/iconRiwayat"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_history"
+            app:tint="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/textRiwayat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Riwayat"
+            android:textSize="11sp"
+            android:textColor="#B6B6B6"/>
+    </LinearLayout>
+
+    <!-- PROFIL -->
+    <LinearLayout
+        android:id="@+id/navProfil"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_nav_selector"
+        android:paddingHorizontal="12dp"
+        android:layout_marginHorizontal="6dp">
+
+        <ImageView
+            android:id="@+id/iconProfil"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_profile"
+            app:tint="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/textProfil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profil"
+            android:textSize="11sp"
+            android:textColor="#B6B6B6"/>
+    </LinearLayout>
+
+</LinearLayout>
