@@ -11,8 +11,11 @@ import com.example.qcare.databinding.ActivityKunjunganBinding
 import com.example.qcare.databinding.ViewBottomNavBinding
 import com.example.qcare.util.BottomNavHelper
 import com.example.qcare.util.NavItem
+import com.example.qcare.util.QueueState
 
 class KunjunganActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityKunjunganBinding
 
     private fun showCancelDialog() {
         val dialog = Dialog(this)
@@ -20,14 +23,11 @@ class KunjunganActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.setCancelable(true)
 
-        val btnYes = dialog.findViewById<TextView>(R.id.btnYes)
-        val btnNo = dialog.findViewById<TextView>(R.id.btnNo)
-
-        btnNo.setOnClickListener {
+        dialog.findViewById<TextView>(R.id.btnNo).setOnClickListener {
             dialog.dismiss()
         }
 
-        btnYes.setOnClickListener {
+        dialog.findViewById<TextView>(R.id.btnYes).setOnClickListener {
             dialog.dismiss()
             finish()
         }
@@ -35,14 +35,12 @@ class KunjunganActivity : AppCompatActivity() {
         dialog.show()
     }
 
-
-    private lateinit var binding: ActivityKunjunganBinding
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityKunjunganBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Bottom Nav
         val bottomNavBinding =
             ViewBottomNavBinding.bind(binding.bottomNav.root)
 
@@ -52,15 +50,30 @@ class KunjunganActivity : AppCompatActivity() {
             NavItem.KUNJUNGAN
         )
 
+        // =========================
+        // TOMBOL "SUDAH SAMPAI"
+        // =========================
         binding.btnArrived.setOnClickListener {
-            // aksi sudah sampai
-            Toast.makeText(this, "Sudah Sampai", Toast.LENGTH_SHORT).show()
+
+            // 🔥 SET STATUS GLOBAL
+            QueueState.sudahSampai = true
+
+            // 🔔 NOTIFIKASI KE PASIEN
+            Toast.makeText(
+                this,
+                "Anda baru saja sampai",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            // 🔒 OPTIONAL: NONAKTIFKAN BUTTON
+            binding.btnArrived.isEnabled = false
+            binding.btnArrived.alpha = 0.6f
+            binding.btnArrived.text = "Sudah Sampai"
         }
 
+        // CANCEL ANTRIAN
         binding.btnCancel.setOnClickListener {
             showCancelDialog()
         }
-
     }
 }
-

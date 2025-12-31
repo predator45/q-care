@@ -10,12 +10,13 @@ class UserDatabaseHelper(context: Context) :
 
     companion object {
         private const val DATABASE_NAME = "qcare.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 2   // ⬅️ NAIKKAN VERSION
 
         private const val TABLE_USER = "users"
         private const val COL_ID = "id"
         private const val COL_EMAIL = "email"
         private const val COL_PASSWORD = "password"
+        private const val COL_ROLE = "role"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -23,7 +24,8 @@ class UserDatabaseHelper(context: Context) :
             CREATE TABLE $TABLE_USER (
                 $COL_ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 $COL_EMAIL TEXT UNIQUE,
-                $COL_PASSWORD TEXT
+                $COL_PASSWORD TEXT,
+                $COL_ROLE TEXT
             )
         """.trimIndent()
 
@@ -35,12 +37,14 @@ class UserDatabaseHelper(context: Context) :
         onCreate(db)
     }
 
-    fun register(email: String, password: String): Boolean {
+    // ✅ REGISTER DENGAN ROLE
+    fun register(email: String, password: String, role: String): Boolean {
         val db = writableDatabase
 
         val values = ContentValues().apply {
             put(COL_EMAIL, email)
             put(COL_PASSWORD, password)
+            put(COL_ROLE, role)
         }
 
         val result = db.insert(TABLE_USER, null, values)
@@ -49,6 +53,7 @@ class UserDatabaseHelper(context: Context) :
         return result != -1L
     }
 
+    // ✅ LOGIN (CEK EMAIL & PASSWORD)
     fun login(email: String, password: String): Boolean {
         val db = readableDatabase
 
@@ -62,5 +67,24 @@ class UserDatabaseHelper(context: Context) :
         db.close()
 
         return exists
+    }
+
+    // ✅ AMBIL ROLE SAAT LOGIN (PENTING)
+    fun getUserRole(email: String): String? {
+        val db = readableDatabase
+        var role: String? = null
+
+        val cursor = db.rawQuery(
+            "SELECT $COL_ROLE FROM $TABLE_USER WHERE $COL_EMAIL=?",
+            arrayOf(email)
+        )
+
+        if (cursor.moveToFirst()) {
+            role = cursor.getString(0)
+        }
+
+        cursor.close()
+        db.close()
+        return role
     }
 }

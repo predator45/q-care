@@ -6,6 +6,7 @@ import com.example.qcare.databinding.ActivityProfileBinding
 import com.example.qcare.databinding.ViewBottomNavBinding
 import com.example.qcare.util.BottomNavHelper
 import com.example.qcare.util.NavItem
+import android.content.Intent
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -15,6 +16,12 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnGantiPassword.setOnClickListener {
+            startActivity(
+                Intent(this, PrivacyActivity::class.java)
+            )
+        }
 
         val bottomNavBinding =
             ViewBottomNavBinding.bind(binding.bottomNav.root)

@@ -23,8 +23,21 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.etPassword.text.toString()
             val confirm = binding.etConfirmPassword.text.toString()
 
+            // AMBIL ROLE
+            val role = when (binding.rgRole.checkedRadioButtonId) {
+                R.id.rbPasien -> "pasien"
+                R.id.rbDokter -> "dokter"
+                else -> ""
+            }
+
+            // VALIDASI
             if (email.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
                 Toast.makeText(this, "Semua field wajib diisi", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (role.isEmpty()) {
+                Toast.makeText(this, "Silakan pilih role", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -33,17 +46,16 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val success = db.register(email, password)
+            // SIMPAN KE DATABASE (ROLE IKUT)
+            val success = db.register(email, password, role)
+
             if (success) {
-                Toast.makeText(this, "Register berhasil", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Register berhasil sebagai $role", Toast.LENGTH_SHORT).show()
                 finish()
             } else {
                 Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
             }
         }
-
-        binding.tvToLogin.setOnClickListener {
-            finish()
-        }
     }
+
 }

@@ -5,4 +5,22 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <style name="CircleImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
+    <style name="NavIndicator">
+        <item name="android:color">#00BFA5</item>
+        <item name="shapeAppearance">@style/NavIndicatorShape</item>
+    </style>
+
+    <style name="NavIndicatorShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
+
 </resources>

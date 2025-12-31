@@ -94,6 +94,39 @@
                 android:layout_height="wrap_content"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"/>
+
+
+            <!-- PILIH ROLE -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pilih Role Anda"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioGroup
+                android:id="@+id/rgRole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbPasien"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pasien"
+                    android:checked="true"
+                    android:layout_marginEnd="24dp"/>
+
+                <RadioButton
+                    android:id="@+id/rbDokter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dokter"/>
+            </RadioGroup>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

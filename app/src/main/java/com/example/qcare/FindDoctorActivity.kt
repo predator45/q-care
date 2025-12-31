@@ -1,8 +1,10 @@
 package com.example.qcare
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.qcare.databinding.ActivityFindDoctorBinding
+import com.example.qcare.util.RequestQueueState
 
 class FindDoctorActivity : AppCompatActivity() {
 
@@ -16,5 +18,8 @@ class FindDoctorActivity : AppCompatActivity() {
         binding.btnBack.setOnClickListener {
             finish()
         }
+
+        // ❌ TIDAK ADA btnAntri DI SINI
+        // ❌ JANGAN PASANG LOGIC ANTRI DI ACTIVITY
     }
 }

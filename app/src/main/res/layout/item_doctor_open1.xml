@@ -96,17 +96,19 @@
             </LinearLayout>
 
             <!-- BUTTON -->
-            <TextView
-                android:text="Antri"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAntri"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
+                android:text="Antri"
                 android:textSize="12sp"
                 android:textStyle="bold"
+                android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:background="@drawable/bg_btn_primary"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="6dp"
+                android:backgroundTint="@color/primary"
+                app:cornerRadius="16dp"
                 android:layout_marginTop="8dp"/>
+
         </LinearLayout>
 
     </LinearLayout>

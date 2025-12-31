@@ -20,23 +20,58 @@ class LoginActivity : AppCompatActivity() {
         db = UserDatabaseHelper(this)
 
         binding.btnLogin.setOnClickListener {
+
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString()
 
+            // VALIDASI INPUT
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Email dan password wajib diisi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Email dan password wajib diisi",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
 
-            val success = db.login(email, password)
-            if (success) {
-                Toast.makeText(this, "Login berhasil", Toast.LENGTH_SHORT).show()
+            // CEK LOGIN
+            val isLoginSuccess = db.login(email, password)
 
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
+            if (isLoginSuccess) {
+
+                // 🔥 AMBIL ROLE USER
+                val role = db.getUserRole(email)
+
+                if (role == "dokter") {
+                    // 👉 KE DASHBOARD DOKTER
+                    startActivity(
+                        Intent(this, DashboardDokterActivity::class.java)
+                    )
+                } else if (role == "pasien") {
+                    // 👉 KE DASHBOARD PASIEN
+                    startActivity(
+                        Intent(this, HomeActivity::class.java)
+                    )
+                } else {
+                    // JAGA-JAGA KALAU ROLE NULL / SALAH
+                    Toast.makeText(
+                        this,
+                        "Role tidak valid",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+
                 finish()
-            }
 
+            } else {
+                // LOGIN GAGAL
+                Toast.makeText(
+                    this,
+                    "Email atau password salah",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         binding.tvToRegister.setOnClickListener {

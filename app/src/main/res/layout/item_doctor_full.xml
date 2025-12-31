@@ -96,17 +96,22 @@
             </LinearLayout>
 
             <!-- BUTTON DISABLED -->
-            <TextView
-                android:text="Full"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAntri"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
+                android:text="Full"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:textColor="#C62828"
-                android:background="@drawable/bg_btn_disable"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="6dp"
+                android:textAllCaps="false"
+
+                android:backgroundTint="@color/input_border_soft"
+
+                app:cornerRadius="16dp"
                 android:layout_marginTop="8dp"/>
+
+
         </LinearLayout>
 
     </LinearLayout>
