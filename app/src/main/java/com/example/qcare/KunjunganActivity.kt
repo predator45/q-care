@@ -12,6 +12,8 @@ import com.example.qcare.databinding.ViewBottomNavBinding
 import com.example.qcare.util.BottomNavHelper
 import com.example.qcare.util.NavItem
 import com.example.qcare.util.QueueState
+import android.content.Intent
+
 
 class KunjunganActivity : AppCompatActivity() {
 
@@ -29,6 +31,12 @@ class KunjunganActivity : AppCompatActivity() {
 
         dialog.findViewById<TextView>(R.id.btnYes).setOnClickListener {
             dialog.dismiss()
+
+
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            finish()
             finish()
         }
 

@@ -2,10 +2,12 @@ package com.example.qcare
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DashboardDokterActivity : AppCompatActivity() {
 
@@ -14,11 +16,11 @@ class DashboardDokterActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dashboard_dokter)
 
         // =========================
-        // RECYCLER VIEW (LIST DOKTER)
+        // RECYCLER VIEW
         // =========================
         val rvDoctor = findViewById<RecyclerView>(R.id.rvDoctor)
 
-        val doctors = listOf(
+        val doctors = mutableListOf(
             Doctor(1, "Dr. Suparma", "Dentis, City Dental", false),
             Doctor(2, "Dr. Rina", "Umum, QCare Clinic", true),
             Doctor(3, "Dr. Andi", "Anak, QCare Clinic", true)
@@ -28,37 +30,41 @@ class DashboardDokterActivity : AppCompatActivity() {
         rvDoctor.adapter = DoctorAdapter(doctors)
 
         // =========================
-        // BOTTOM NAVIGATION LOGIC
+        // BUTTON & FAB
         // =========================
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        val btnAddDoctor = findViewById<MaterialButton>(R.id.btnAddDoctor)
+        val fabNotification = findViewById<FloatingActionButton>(R.id.fabNotification)
 
-        // tandai menu dashboard sebagai aktif
-        bottomNav.selectedItemId = R.id.nav_dashboard
+        // Button → Tambah Dokter
+        btnAddDoctor.setOnClickListener {
+            startActivity(Intent(this, TambahDokterActivity::class.java))
+        }
 
-        bottomNav.setOnItemSelectedListener { item ->
-            when (item.itemId) {
+        // FAB → Kelola Antrian
+        fabNotification.setOnClickListener {
+            startActivity(Intent(this, KelolaAntrianActivity::class.java))
+        }
 
-                R.id.nav_dashboard -> {
-                    // sudah di dashboard
-                    true
-                }
+        // =========================
+        // BOTTOM NAV (CUSTOM)
+        // =========================
+        val navHome = findViewById<View>(R.id.navHome)
+        val navTambahDokter = findViewById<View>(R.id.navTambahDokter)
+        val navKelolaAntrian = findViewById<View>(R.id.navKelolaAntrian)
 
-                R.id.nav_add_doctor -> {
-                    startActivity(
-                        Intent(this, TambahDokterActivity::class.java)
-                    )
-                    true
-                }
+        // set ACTIVE menu (Dashboard = Home)
+        navHome.isSelected = true
 
-                R.id.nav_manage -> {
-                    startActivity(
-                        Intent(this, KelolaAntrianActivity::class.java)
-                    )
-                    true
-                }
+        navHome.setOnClickListener {
+            // sudah di dashboard
+        }
 
-                else -> false
-            }
+        navTambahDokter.setOnClickListener {
+            startActivity(Intent(this, TambahDokterActivity::class.java))
+        }
+
+        navKelolaAntrian.setOnClickListener {
+            startActivity(Intent(this, KelolaAntrianActivity::class.java))
         }
     }
 }

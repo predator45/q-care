@@ -152,21 +152,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <!-- BOTTOM NAV -->
+    <include
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
-        android:layout_height="84dp"
-        android:background="@drawable/bg_bottom_nav"
-
-        app:menu="@menu/menu_bottom_dokter"
-        app:labelVisibilityMode="labeled"
-
-        app:itemIconTint="@color/nav_selector"
-        app:itemTextColor="@color/nav_selector"
-
-
-        app:itemRippleColor="@android:color/transparent"
-
+        android:layout_height="80dp"
+        layout="@layout/view_bottom_nav2"
+        android:background="@drawable/bg_nav_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

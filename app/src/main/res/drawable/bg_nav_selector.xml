@@ -1,25 +1,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- AKTIF -->
     <item android:state_selected="true"
         android:drawable="@drawable/bg_nav_active"/>
-
-    <!-- DEFAULT -->
-    <item android:drawable="@android:color/transparent"/>
-
-    <item
-        android:state_enabled="false"
-        android:drawable="@drawable/bg_btn_outline"/>
-
-    <!-- DEFAULT (AKTIF / HIJAU) -->
-    <item
-        android:drawable="@drawable/bg_btn_primary"/>
+    <item android:drawable="@drawable/bg_nav_inactive"/>
 </selector>
-
-
-
-
-
-
-
-

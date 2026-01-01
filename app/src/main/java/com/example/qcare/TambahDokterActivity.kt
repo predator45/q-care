@@ -1,5 +1,6 @@
 package com.example.qcare
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -15,7 +16,7 @@ class TambahDokterActivity : AppCompatActivity() {
     // FOTO OPSIONAL
     private var imageUri: Uri? = null
 
-    // Image picker modern (AMAN Android terbaru)
+    // Image picker modern
     private val pickImage =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             imageUri = uri
@@ -35,7 +36,9 @@ class TambahDokterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tambah_dokter)
 
-        // INIT VIEW
+        // =========================
+        // INIT VIEW FORM
+        // =========================
         imgPreview = findViewById(R.id.imgPreview)
         etNama = findViewById(R.id.etNamaDokter)
         etKategori = findViewById(R.id.etKategori)
@@ -45,24 +48,29 @@ class TambahDokterActivity : AppCompatActivity() {
         val btnChooseImage = findViewById<MaterialButton>(R.id.btnChooseImage)
         val btnTambahDokter = findViewById<MaterialButton>(R.id.btnTambahDokter)
 
-        // BACK
+        // =========================
+        // BACK BUTTON
+        // =========================
         btnBack.setOnClickListener {
             finish()
         }
 
+        // =========================
         // CHOOSE IMAGE (OPSIONAL)
+        // =========================
         btnChooseImage.setOnClickListener {
             pickImage.launch("image/*")
         }
 
-        // SUBMIT
+        // =========================
+        // SUBMIT FORM
+        // =========================
         btnTambahDokter.setOnClickListener {
 
             val nama = etNama.text.toString().trim()
             val kategori = etKategori.text.toString().trim()
             val tempat = etTempat.text.toString().trim()
 
-            // VALIDASI (FOTO TIDAK WAJIB)
             if (nama.isEmpty() || kategori.isEmpty() || tempat.isEmpty()) {
                 Toast.makeText(
                     this,
@@ -75,8 +83,7 @@ class TambahDokterActivity : AppCompatActivity() {
             // FOTO OPSIONAL
             val fotoDokter: String? = imageUri?.toString()
 
-            // 🔥 NANTI DI SINI SIMPAN KE DATABASE
-            // contoh:
+            // TODO: SIMPAN KE DATABASE / API
             // db.insertDoctor(nama, kategori, tempat, fotoDokter)
 
             Toast.makeText(
@@ -86,8 +93,30 @@ class TambahDokterActivity : AppCompatActivity() {
             ).show()
 
             finish()
+        }
 
+        // =========================
+        // BOTTOM NAV (CUSTOM)
+        // =========================
+        val navHome = findViewById<View>(R.id.navHome)
+        val navTambahDokter = findViewById<View>(R.id.navTambahDokter)
+        val navKelolaAntrian = findViewById<View>(R.id.navKelolaAntrian)
 
+        // set ACTIVE menu (Tambah Dokter)
+        navTambahDokter.isSelected = true
+
+        navHome.setOnClickListener {
+            startActivity(Intent(this, DashboardDokterActivity::class.java))
+            finish()
+        }
+
+        navTambahDokter.setOnClickListener {
+            // sudah di halaman ini
+        }
+
+        navKelolaAntrian.setOnClickListener {
+            startActivity(Intent(this, KelolaAntrianActivity::class.java))
+            finish()
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.qcare
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class DoctorAdapter(
-    private val doctors: List<Doctor>
+    private val doctors: MutableList<Doctor>
 ) : RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder>() {
 
     inner class DoctorViewHolder(itemView: View) :
@@ -18,6 +19,7 @@ class DoctorAdapter(
         val tvReady: TextView = itemView.findViewById(R.id.tvReady)
         val tvFull: TextView = itemView.findViewById(R.id.tvFull)
         val tvManage: TextView = itemView.findViewById(R.id.tvManage)
+        val btnDelete: View = itemView.findViewById(R.id.btnDelete)
     }
 
     override fun onCreateViewHolder(
@@ -35,17 +37,59 @@ class DoctorAdapter(
     ) {
         val doctor = doctors[position]
 
+        // =====================
         // TEXT
+        // =====================
         holder.tvName.text = doctor.name
         holder.tvSpec.text = doctor.spec
 
-        // STATUS
+        // =====================
+        // STATUS UI (READY / FULL)
+        // =====================
         if (doctor.isReady) {
             holder.tvReady.setBackgroundResource(R.drawable.bg_ready_active)
             holder.tvFull.setBackgroundResource(R.drawable.bg_full_inactive)
         } else {
             holder.tvReady.setBackgroundResource(R.drawable.bg_ready_inactive)
             holder.tvFull.setBackgroundResource(R.drawable.bg_full_active)
+        }
+
+        // =====================
+        // READY CLICK
+        // =====================
+        holder.tvReady.setOnClickListener {
+            if (!doctor.isReady) {
+                doctor.isReady = true
+                notifyItemChanged(position)
+            }
+        }
+
+        // =====================
+        // FULL CLICK
+        // =====================
+        holder.tvFull.setOnClickListener {
+            if (doctor.isReady) {
+                doctor.isReady = false
+                notifyItemChanged(position)
+            }
+        }
+
+        // =====================
+        // MANAGE ANTRIAN
+        // =====================
+        holder.tvManage.setOnClickListener {
+            val context = it.context
+            val intent = Intent(context, KelolaAntrianActivity::class.java)
+            intent.putExtra("doctor_id", doctor.id)
+            context.startActivity(intent)
+        }
+
+        // =====================
+        // DELETE DOKTER
+        // =====================
+        holder.btnDelete.setOnClickListener {
+            doctors.removeAt(position)
+            notifyItemRemoved(position)
         }
     }
 

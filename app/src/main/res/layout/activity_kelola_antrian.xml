@@ -45,50 +45,43 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
-            android:layout_width="50dp"
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:layout_height="wrap_content"
             android:text="Nomor"
             android:textSize="12sp"
             android:textStyle="bold"
-
-            android:layout_height="wrap_content"
             android:textColor="@android:color/white"/>
 
         <TextView
-            android:layout_width="80dp"
+            android:layout_width="0dp"
+            android:layout_weight="1.6"
+            android:layout_height="wrap_content"
             android:text="Estimasi"
             android:textSize="12sp"
-
-            android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textColor="@android:color/white"/>
 
         <TextView
-            android:layout_width="80dp"
+            android:layout_width="0dp"
+            android:layout_weight="1.6"
+            android:layout_height="wrap_content"
             android:text="Tiba"
-
-            android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"/>
 
         <TextView
-            android:layout_width="80dp"
-            android:text="Aksi"
-
+            android:layout_width="0dp"
+            android:layout_weight="1.6"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"/>
-
-        <TextView
-            android:layout_width="70dp"
             android:text="Status"
             android:textSize="12sp"
-
-            android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white"
+            android:gravity="center"/>
     </LinearLayout>
+
 
 
     <!-- LIST ANTRIAN -->
@@ -125,22 +118,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- BOTTOM NAV -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <include
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
-        android:layout_height="84dp"
-        android:background="@drawable/bg_bottom_nav"
-
-        app:menu="@menu/menu_bottom_dokter"
-        app:labelVisibilityMode="labeled"
-
-        app:itemIconTint="@color/nav_selector"
-        app:itemTextColor="@color/nav_selector"
-
-
-        app:itemRippleColor="@android:color/transparent"
-
+        android:layout_height="80dp"
+        layout="@layout/view_bottom_nav2"
+        android:background="@drawable/bg_nav_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

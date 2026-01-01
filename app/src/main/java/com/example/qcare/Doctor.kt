@@ -4,5 +4,5 @@ data class Doctor(
     val id: Int,
     val name: String,
     val spec: String,
-    val isReady: Boolean
+    var isReady: Boolean
 )

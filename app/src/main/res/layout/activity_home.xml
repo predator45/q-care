@@ -320,6 +320,7 @@
 
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardHistory"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
                     android:layout_weight="1"
@@ -341,14 +342,14 @@
                         <ImageView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@drawable/ic_group"
+                            android:src="@drawable/ic_history"
                             android:layout_marginBottom="12dp"
                             app:tint="@android:color/black"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Dapatkan Antrian"
+                            android:text="Riwayat"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/black"/>

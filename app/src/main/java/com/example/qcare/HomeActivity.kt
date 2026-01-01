@@ -21,6 +21,15 @@ class HomeActivity : AppCompatActivity() {
             startActivity(Intent(this, FindDoctorActivity::class.java))
         }
 
+        binding.cardHistory.setOnClickListener {
+            startActivity(Intent(this, RiwayatActivity::class.java))
+        }
+
+        binding.cardAntrianBerlangsung.setOnClickListener {
+            startActivity(Intent(this, KunjunganActivity::class.java))
+        }
+
+
         val bottomNavBinding =
             ViewBottomNavBinding.bind(binding.bottomNav.root)
 

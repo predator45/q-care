@@ -1,0 +1,96 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_bottom_nav"
+    android:gravity="center">
+
+    <!-- HOME (TETAP) -->
+    <LinearLayout
+        android:id="@+id/navHome"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_nav_selector"
+        android:paddingHorizontal="12dp"
+        android:layout_marginHorizontal="6dp">
+
+        <ImageView
+            android:id="@+id/iconHome"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_home"
+            app:tint="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/textHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Home"
+            android:textSize="11sp"
+            android:textColor="#B6B6B6"/>
+    </LinearLayout>
+
+    <!-- TAMBAH DOKTER -->
+    <LinearLayout
+        android:id="@+id/navTambahDokter"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_nav_selector"
+        android:paddingHorizontal="12dp"
+        android:layout_marginHorizontal="6dp">
+
+        <ImageView
+            android:id="@+id/iconTambahDokter"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/ic_add"
+            app:tint="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/textTambahDokter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Dokter"
+            android:textSize="11sp"
+            android:textColor="#B6B6B6"/>
+    </LinearLayout>
+
+    <!-- KELOLA ANTRIAN -->
+    <LinearLayout
+        android:id="@+id/navKelolaAntrian"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/bg_nav_selector"
+        android:paddingHorizontal="12dp"
+        android:layout_marginHorizontal="6dp">
+
+        <ImageView
+            android:id="@+id/iconKelolaAntrian"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/bg_nav_selector"
+            android:src="@drawable/ic_manage"
+            app:tint="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/textKelolaAntrian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_nav_selector"
+            android:text="Kelola Antrian"
+            android:textSize="11sp"
+            android:textColor="#B6B6B6"/>
+    </LinearLayout>
+
+</LinearLayout>

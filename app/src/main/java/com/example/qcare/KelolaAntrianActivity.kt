@@ -1,12 +1,13 @@
 package com.example.qcare
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.qcare.util.QueueState
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class KelolaAntrianActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class KelolaAntrianActivity : AppCompatActivity() {
             Antrian(
                 nomor = "B-01",
                 estimasiMenit = 0,
-                sudahSampai = QueueState.sudahSampai, // 🔥 TERHUBUNG DARI PASIEN
+                sudahSampai = QueueState.sudahSampai,
                 sedangDipanggil = false,
                 selesai = false
             ),
@@ -54,10 +55,28 @@ class KelolaAntrianActivity : AppCompatActivity() {
         }
 
         // =====================
-        // NAVBAR
+        // BOTTOM NAV (CUSTOM)
         // =====================
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomNav.selectedItemId = R.id.nav_manage
+        val navHome = findViewById<View>(R.id.navHome)
+        val navTambahDokter = findViewById<View>(R.id.navTambahDokter)
+        val navKelolaAntrian = findViewById<View>(R.id.navKelolaAntrian)
+
+        // set ACTIVE menu (Kelola Antrian)
+        navKelolaAntrian.isSelected = true
+
+        navHome.setOnClickListener {
+            startActivity(Intent(this, DashboardDokterActivity::class.java))
+            finish()
+        }
+
+        navTambahDokter.setOnClickListener {
+            startActivity(Intent(this, TambahDokterActivity::class.java))
+            finish()
+        }
+
+        navKelolaAntrian.setOnClickListener {
+            // sudah di halaman ini
+        }
 
         // =====================
         // NOTIF JIKA PASIEN SUDAH SAMPAI

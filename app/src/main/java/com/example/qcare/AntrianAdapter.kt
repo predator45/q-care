@@ -17,7 +17,6 @@ class AntrianAdapter(
         val tvNomor: TextView = itemView.findViewById(R.id.tvNomor)
         val tvEstimasi: TextView = itemView.findViewById(R.id.tvEstimasi)
         val tvTiba: TextView = itemView.findViewById(R.id.tvTiba)
-        val btnPanggil: MaterialButton = itemView.findViewById(R.id.btnPanggil)
         val btnSelesai: MaterialButton = itemView.findViewById(R.id.btnSelesai)
     }
 
@@ -36,23 +35,26 @@ class AntrianAdapter(
     ) {
         val item = items[position]
 
+        // =====================
+        // SET DATA
+        // =====================
         holder.tvNomor.text = item.nomor
+
         holder.tvEstimasi.text =
             if (item.estimasiMenit == 0) "-" else "${item.estimasiMenit} Menit"
 
         holder.tvTiba.text =
             if (item.sudahSampai) "Sudah Sampai" else "Belum Sampai"
 
-        // PANGGIL HANYA AKTIF JIKA SUDAH SAMPAI
-        holder.btnPanggil.isEnabled = item.sudahSampai
-        holder.btnPanggil.alpha = if (item.sudahSampai) 1f else 0.4f
-
-        holder.btnPanggil.setOnClickListener {
-            item.sedangDipanggil = true
-            notifyItemChanged(position)
-        }
+        // =====================
+        // LOGIKA BUTTON SELESAI
+        // =====================
+        holder.btnSelesai.isEnabled = item.sudahSampai
+        holder.btnSelesai.alpha = if (item.sudahSampai) 1f else 0.4f
 
         holder.btnSelesai.setOnClickListener {
+            if (!item.sudahSampai) return@setOnClickListener
+
             item.selesai = true
             items.removeAt(position)
             notifyItemRemoved(position)
