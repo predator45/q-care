@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.qcare.databinding.ActivityRegisterBinding
+import com.example.qcare.db.UserDatabaseHelper
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+    // 1. Declare the 'db' variable here
     private lateinit var db: UserDatabaseHelper
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +19,7 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 2. Initialize the 'db' variable
         db = UserDatabaseHelper(this)
 
         binding.btnRegister.setOnClickListener {
@@ -47,6 +51,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             // SIMPAN KE DATABASE (ROLE IKUT)
+            // 3. Now 'db' can be accessed without error
             val success = db.register(email, password, role)
 
             if (success) {
@@ -55,6 +60,7 @@ class RegisterActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Email sudah terdaftar", Toast.LENGTH_SHORT).show()
             }
+
         }
     }
 
