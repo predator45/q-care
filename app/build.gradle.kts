@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.qcare"
+    namespace = "com.qcare.app"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.qcare"
+        applicationId = "com.qcare.app"
         minSdk = 27
         targetSdk = 36
         versionCode = 1
@@ -53,8 +53,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.google.android.material:material:1.11.0")
-    implementation ("androidx.room:room-runtime:2.6.1")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.6")
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.6")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+
 
 }

@@ -133,17 +133,19 @@
 
 
             <!-- PATIENT ID -->
+
             <TextView
                 android:id="@+id/tvPatientId"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Patient ID: #8849202"
-                android:textSize="14sp"
+                android:layout_marginTop="20dp"
+                android:text="Pasien ID: #8849202"
                 android:textColor="@color/primary"
-                app:layout_constraintTop_toBottomOf="@id/tvName"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="4dp"/>
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvName" />
 
             <TextView
                 android:id="@+id/tvRole"
