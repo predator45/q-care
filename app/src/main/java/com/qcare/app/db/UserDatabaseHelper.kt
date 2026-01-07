@@ -11,10 +11,9 @@ class UserDatabaseHelper(context: Context) :
 
     companion object {
         private const val DATABASE_NAME = "qcare.db"
-        private const val DATABASE_VERSION = 3   // ⬅️ WAJIB NAIK
+        private const val DATABASE_VERSION = 4 // ⬅️ NAIKKAN VERSION (WAJIB)
 
         const val TABLE_USER = "users"
-
         const val COL_ID = "id"
         const val COL_EMAIL = "email"
         const val COL_PASSWORD = "password"
@@ -25,6 +24,7 @@ class UserDatabaseHelper(context: Context) :
     }
 
     override fun onCreate(db: SQLiteDatabase) {
+
         val createTable = """
             CREATE TABLE $TABLE_USER (
                 $COL_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -38,6 +38,30 @@ class UserDatabaseHelper(context: Context) :
         """.trimIndent()
 
         db.execSQL(createTable)
+
+        // ================== AKUN DEFAULT ==================
+
+        // 1️⃣ AKUN DOKTER
+        val dokter = ContentValues().apply {
+            put(COL_EMAIL, "dokter@qcare.com")
+            put(COL_PASSWORD, "dokter123")
+            put(COL_ROLE, "dokter")
+            put(COL_FULLNAME, "Dokter QCare")
+            put(COL_PHONE, "081234567890")
+            put(COL_ADDRESS, "Klinik QCare")
+        }
+        db.insert(TABLE_USER, null, dokter)
+
+        // 2️⃣ AKUN PASIEN
+        val pasien = ContentValues().apply {
+            put(COL_EMAIL, "pasien@qcare.com")
+            put(COL_PASSWORD, "pasien123")
+            put(COL_ROLE, "pasien")
+            put(COL_FULLNAME, "Pasien QCare")
+            put(COL_PHONE, "089876543210")
+            put(COL_ADDRESS, "Bandung")
+        }
+        db.insert(TABLE_USER, null, pasien)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -56,7 +80,6 @@ class UserDatabaseHelper(context: Context) :
             put(COL_PHONE, "")
             put(COL_ADDRESS, "")
         }
-
         val result = db.insert(TABLE_USER, null, values)
         db.close()
         return result != -1L
@@ -107,21 +130,18 @@ class UserDatabaseHelper(context: Context) :
         phone: String,
         address: String
     ): Boolean {
-
         val db = writableDatabase
         val values = ContentValues().apply {
-            put("full_name", fullName)
-            put("phone", phone)
-            put("address", address)
+            put(COL_FULLNAME, fullName)
+            put(COL_PHONE, phone)
+            put(COL_ADDRESS, address)
         }
-
         val result = db.update(
-            "users",
+            TABLE_USER,
             values,
-            "id = ?",
+            "$COL_ID = ?",
             arrayOf(userId.toString())
         )
-
         db.close()
         return result > 0
     }

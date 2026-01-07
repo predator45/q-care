@@ -4,17 +4,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.qcare.app.DashboardDokterActivity
-import com.qcare.app.HomeActivity
 import com.qcare.app.databinding.ActivityLoginBinding
 import com.qcare.app.db.UserDatabaseHelper
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    // In LoginActivity.kt
     private lateinit var db: UserDatabaseHelper
-
+    private lateinit var session: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,14 +19,14 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         db = UserDatabaseHelper(this)
+        session = SessionManager(this)
 
-
+        // 🔐 LOGIN
         binding.btnLogin.setOnClickListener {
 
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString()
 
-            // VALIDASI INPUT
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(
                     this,
@@ -40,54 +37,42 @@ class LoginActivity : AppCompatActivity() {
             }
 
             // CEK LOGIN
-            val isLoginSuccess = db.login(email, password)
-
-            if (isLoginSuccess) {
+            if (db.login(email, password)) {
 
                 val role = db.getUserRole(email)
 
+                if (role == null) {
+                    Toast.makeText(this, "Role tidak valid", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                // SIMPAN SESSION
+                session.saveLogin(email, role)
+
+                // ROUTING BERDASARKAN ROLE
                 when (role) {
                     "dokter" -> {
                         startActivity(
                             Intent(this, DashboardDokterActivity::class.java)
                         )
-                        finish()
                     }
-
                     "pasien" -> {
                         startActivity(
                             Intent(this, HomeActivity::class.java)
                         )
-                        finish()
                     }
-
                     else -> {
                         Toast.makeText(
                             this,
-                            "Role tidak valid",
+                            "Role tidak dikenali",
                             Toast.LENGTH_SHORT
                         ).show()
+                        return@setOnClickListener
                     }
                 }
 
-                val session = SessionManager(this)
-
-                if (isLoginSuccess) {
-                    val role = db.getUserRole(email) ?: ""
-
-                    session.saveLogin(email, role)
-
-                    when (role) {
-                        "dokter" -> startActivity(Intent(this, DashboardDokterActivity::class.java))
-                        "pasien" -> startActivity(Intent(this, HomeActivity::class.java))
-                        else -> {
-                            Toast.makeText(this, "Role tidak valid", Toast.LENGTH_SHORT).show()
-                            return@setOnClickListener
-                        }
-                    }
-                    finish()
-                }
-
+                // TUTUP LOGIN
+                finish()
 
             } else {
                 Toast.makeText(
@@ -98,11 +83,9 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // PINDAH KE REGISTER
+        // 👉 KE REGISTER
         binding.tvToRegister.setOnClickListener {
-            startActivity(
-                Intent(this, RegisterActivity::class.java)
-            )
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 }
